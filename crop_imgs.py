@@ -1,11 +1,8 @@
-"""help from https://dzone.com/articles/how-to-crop-a-photo-with-python and
-https://stackoverflow.com/questions/9983263/crop-the-image-using-pil-in-python"""
-
 import os
 from PIL import Image
 
 def crop(images_path, images_out_path):
-    """crop BDD 1280 x 720 img to 1280 x 704 img (mult. of 32)"""
+    """Crop BDD 1280 x 720 img to 1280 x 704 img (mult. of 32). TO-DO: add dimensions in as input."""
     
     for img in os.listdir(images_path):
         if img.endswith('.jpg'):
@@ -17,7 +14,7 @@ def crop(images_path, images_out_path):
             continue
 
 if __name__ == '__main__':
-    images_path = '/Users/julia/bddsamplejson/images/'
-    images_out_path = '/Users/julia/bddsamplejson/images/cropped-images/'
+    images_path = 'IMAGES_DIR'
+    images_out_path = 'OUT_DIR' # existing directory
     crop(images_path, images_out_path) 
 
