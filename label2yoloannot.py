@@ -1,4 +1,4 @@
-# Adapted label2det.py to prepare annotations for YOLO 3 training
+# Adapted label2det.py from https://github.com/ucbdrive/bdd-data to prepare annotations for YOLO v3 training via Darknet
 
 import argparse
 import json
@@ -113,6 +113,10 @@ def label2annot(label):
 
 def make_annotations(label_dir, imgs_dir, path_to_darknet):
     # adapted change_dir function from label2d.py
+    """Prepare text files for Darknet YOLO training. 
+    1. Creates and writes to 'train.txt' with paths to images. Saved in cwd. 
+    2. Creates corresponding '.txt' file for each image with the annotations. Saved in same dir as images."""
+    
     if not osp.exists(label_dir):
         print('Can not find', label_dir)
         return
@@ -144,10 +148,9 @@ def make_annotations(label_dir, imgs_dir, path_to_darknet):
 
 def main():
     # args = parse_args()
-    label_dir = '/Users/julia/bddsamplejson/'
-    imgs_dir = label_dir + 'images/cropped-images/'
-    path_to_darknet = '/Users/julia/bddsamplejson/mock-darknet/'
-    # det_path = label_dir + 'annotations/bddsamplejsonout.txt' # to .txt file 
+    label_dir = 'PATH_TO_JSON_FILES'
+    imgs_dir = 'PATH_TO_IMAGES'
+    path_to_darknet = 'PATH_TO_DARKNET' # from https://github.com/AlexeyAB/darknet 
     make_annotations(label_dir, imgs_dir, path_to_darknet)
 
 
