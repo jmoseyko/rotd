@@ -125,7 +125,7 @@ def make_annotations(label_dir, imgs_dir, path_to_darknet):
                    if osp.splitext(n)[1] == '.json']
     
     count = 0
-    train_file = open('train.txt', 'w+')
+    train_file = open(path_to_darknet + 'build/darknet/x64/data/train.txt', 'w+')
     for name in input_names:
         root_name = os.path.splitext(name)[0]
         
@@ -139,7 +139,7 @@ def make_annotations(label_dir, imgs_dir, path_to_darknet):
         f.write(out) 
         
         # write image path to train.txt
-        train_file.write(path_to_darknet + root_name + '.jpg\n')
+        train_file.write(imgs_dir + root_name + '.jpg\n')
         
         count += 1
         if count % 1000 == 0:
