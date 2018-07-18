@@ -114,7 +114,7 @@ def label2annot(label):
 def make_annotations(label_dir, imgs_dir, path_to_darknet):
     # adapted change_dir function from label2d.py
     """Prepare text files for Darknet YOLO training. 
-    1. Creates and writes to 'train.txt' with paths to images. Saved in cwd. 
+    1. Creates and writes to 'train.txt' with paths to images. Saved in darknet .../data/ dir. 
     2. Creates corresponding '.txt' file for each image with the annotations. Saved in same dir as images."""
     
     if not osp.exists(label_dir):
