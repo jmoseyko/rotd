@@ -58,11 +58,19 @@ def convert(label, w_i, h_i):
     return box
 
 
-def make_annotations(label_dir, imgs_dir, darknet_dir):
+def make_annotations(label_dir, imgs_dir, darknet_dir, file):
     # adapted change_dir function from label2d.py
     """Prepare text files for Darknet YOLO training. 
-    1. Creates and writes to 'train.txt' with paths to images. Saved in /darknet/build/.../data/ dir.  
-    2. Creates corresponding '.txt' file for each image with the annotations. Saved in same dir as images."""
+    1. Creates and writes to file with paths to images. Saved in .../darknet/data dir.  
+    2. Creates corresponding '.txt' file for each image with the annotations. Saved in same dir as images.
+    
+    Args:
+        label_dir -- abs. path to json labels (corresponding to images)
+        imgs_dir -- abs. path to jpg images (corresponding to labels)
+        darknet_dir -- abs. path to darknet directory, as cloned from https://github.com/AlexeyAB/darknet
+        file -- either 'train.txt' or 'test.txt'
+        
+    """
     
     if not osp.exists(label_dir):
         print('Can not find', label_dir)
@@ -72,7 +80,7 @@ def make_annotations(label_dir, imgs_dir, darknet_dir):
                    if osp.splitext(n)[1] == '.json']
     
     count = 0
-    train_file = open(osp.join(darknet_dir,'build/darknet/x64/data/train.txt'), 'w+')
+    train_file = open(osp.join(darknet_dir,'data', file), 'w+')
     for name in input_names:
         root_name = os.path.splitext(name)[0]
         
@@ -100,9 +108,10 @@ def make_annotations(label_dir, imgs_dir, darknet_dir):
 
 def main():
     label_dir = '/Users/julia/bddsamplejson'
-    imgs_dir = '/Users/julia/darknet/build/darknet/x64/data/bdd'
+    imgs_dir = '/Users/julia/darknet/data/bdd'
     darknet_dir = '/Users/julia/darknet'
-    make_annotations(label_dir, imgs_dir, darknet_dir)
+    file = 'train.txt' # either 'train.txt' or 'test.txt'
+    make_annotations(label_dir, imgs_dir, darknet_dir, file)
 
 
 if __name__ == '__main__':
