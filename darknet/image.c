@@ -1,3 +1,5 @@
+// modified image.c file from https://github.com/AlexeyAB/darknet 
+
 #include "image.h"
 #include "utils.h"
 #include "blas.h"
