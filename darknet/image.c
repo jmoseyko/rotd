@@ -1155,6 +1155,7 @@ void save_image_png(image im, const char *name)
 
 // Thank you Klas Lindback, from https://stackoverflow.com/questions/32477786/get-file-name-from-a-path-string-implementation-in-c
 // Adapted for Unix
+// returns the final file name with NO extensions (eg. png, jpg, etc)
 const char* getFileName(const char *path) {
     const char *retVal = path;
     for (const char *p = path; *p; p++) {
@@ -1162,6 +1163,7 @@ const char* getFileName(const char *path) {
             retVal = p;
         }
     }
+    strip_ext(retVal) // remove file extension
     return retVal;
 }
 
