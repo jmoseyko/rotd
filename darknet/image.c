@@ -1167,6 +1167,23 @@ const char* getFileName(const char *path) {
     return retVal;
 }
 
+// Thank you May O'Naise from https://stackoverflow.com/questions/2736753/how-to-remove-extension-from-file-name
+// On TO-DO: implement cleaner solution, this is only temp work-around
+const char* elimExt(const char *mystr) {
+    char *retstr;
+    char *lastdot;
+    char *nmystr = mystr;
+    if (mystr == NULL)
+         return NULL;
+    if ((retstr = malloc (strlen (mystr) + 1)) == NULL)
+        return NULL;
+    strcpy (retstr, nmystr);
+    lastdot = strrchr (retstr, '.');
+    if (lastdot != NULL)
+        *lastdot = '\0';
+    return retstr;
+}
+
 // new function based off of save_image_png to save as png in darknet/results/folder
 void save_image_results(image im, const char *name)
 {
@@ -1174,6 +1191,7 @@ void save_image_results(image im, const char *name)
     //sprintf(buff, "%s (%d)", name, windows);
     char *path = "results/";
     const char *fileName = getFileName(name);
+    fileName = elimExt(fileName);
     sprintf(buff, "%s%s.png", path, fileName);
     // sprintf(buff, "%s.png", name);
     unsigned char *data = calloc(im.w*im.h*im.c, sizeof(char));
