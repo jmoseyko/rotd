@@ -1,20 +1,22 @@
-import csv
+#import csv
 import os
 from os import path as osp
 import matplotlib.pyplot as plt
 
+# TO-DO: create separate function to convert iteration & corresponding loss values to csv file
+
 def extract_lines(file):
     # get line with loss information. write to new file and return said file. 
     new_file = open(osp.join(os.getcwd(), 'lines.txt'), 'w+')
-    csv_file = open('csv_info.csv', 'w+')
-    writer = csv.writer(csv_file)
+    # csv_file = open('csv_info.csv', 'w+')
+    # writer = csv.writer(csv_file)
     count = 0
     
     # for graph
     x = []
     y = []
     with open(file) as f:
-        #writer.writerow(['Iteration', 'Cum loss', 'Avg loss', 'Rate', 'Seconds', 'Images'])
+        # writer.writerow(['Iteration', 'Cum loss', 'Avg loss', 'Rate', 'Seconds', 'Images'])
         iter_num = 0
         for line in f:
             line = line.strip()
@@ -58,8 +60,8 @@ def main():
     # main
     file_path = '/Users/julia/Downloads/logs.txt'
     extract_lines(file_path)
-    #csv_file = convert_to_csv('/Users/julia/rotd/lines.txt')
-    #print('CSV file saved to %s' % csv_file.name)
+    # csv_file = convert_to_csv('/Users/julia/rotd/lines.txt') -- this function was removed and is now on to-do.
+    # print('CSV file saved to %s' % csv_file.name)
 
 if __name__ == '__main__':
     main()
